@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import *
 
+
 class Attendee(QWidget):
 
     def __init__(self,attendee,level_list):
