@@ -18,24 +18,30 @@ class EventCreationWindow(QMainWindow):
         self.attendee_list_tab = QWidget()
         self.launch_tab = QWidget()
 
-        #Set Up Sponsorship List Tab
+        #Set Up Sponsorship List Tab Widgets and Layouts
         self.sponsorship_tab_layout = QVBoxLayout()
         self.sponsorship_list_tab.setLayout(self.sponsorship_tab_layout)
         self.input_bar = QLineEdit()
         self.add_button = QPushButton("Add Level")
+        self.sponsorship_list_holder = QWidget()
+        self.scroll_sponsorship = QScrollArea()
+        self.sponsorship_list_holder_layout = QVBoxLayout()
+
+        #Add Input Bar and Push button
         self.sponsorship_tab_layout.addWidget(self.input_bar)
         self.sponsorship_tab_layout.addWidget(self.add_button)
-        self.sponsorship_list_holder = QWidget()
-        self.sponsorship_list_holder_layout = QVBoxLayout()
-        self.scroll_sponsorship = QScrollArea()
+
+        #set scroll to sponsorship levels
         self.scroll_sponsorship.setWidget(self.sponsorship_list_holder)
         self.sponsorship_tab_layout.addWidget(self.scroll_sponsorship)
         self.scroll_sponsorship.setWidgetResizable(True)
+
+        #Add Sponsorship Levels from List
         for level in self.sponsorship_levels:
             widget = Sponsorship(level)
             self.sponsorship_list_holder_layout.addWidget(widget)
+
         self.sponsorship_list_holder.setLayout(self.sponsorship_list_holder_layout)
-        self.sponsorship_tab_layout.addWidget(self.sponsorship_list_holder)
         self.tabs.addTab(self.sponsorship_list_tab, "Sponsorship List")
 
 
