@@ -37,9 +37,9 @@ class MainCheckInWindow(QMainWindow):
 
         # Set Up Close Tab
         self.close_tab_layout = QVBoxLayout()
+        self.close_tab.setLayout(self.close_tab_layout)
         self.close_button = QPushButton("Close Check in Session")
         self.close_tab_layout.addWidget(self.close_button)
-        self.close_tab.setLayout(self.close_tab_layout)
         self.tabs.addTab(self.close_tab, "End Check In Session")
 
         self.setCentralWidget(self.tabs)
