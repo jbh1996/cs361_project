@@ -75,8 +75,6 @@ class EventCreationWindow(QMainWindow):
         self.setCentralWidget(self.tabs)
 
 
-
-
 app = QApplication(sys.argv)
 w = EventCreationWindow()
 w.show()
