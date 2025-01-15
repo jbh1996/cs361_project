@@ -5,7 +5,6 @@ class Attendee(QWidget):
 
     def __init__(self,attendee,level_list):
         super().__init__()
-        self.ticket_amount = 1
         self._layout = QHBoxLayout()
         self._name_display = QLabel(attendee)
         self.dropdown_box = QComboBox()

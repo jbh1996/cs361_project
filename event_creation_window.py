@@ -1,6 +1,7 @@
 import sys
 from PyQt6.QtWidgets import *
 from sponsorship_widget import Sponsorship
+from attendee_widget import Attendee
 from PyQt6.QtCore import Qt
 
 
@@ -11,6 +12,7 @@ class EventCreationWindow(QMainWindow):
         super().__init__(*args, **kwargs)
 
         self.sponsorship_levels = ["General Attendee"]
+        self.attendees = ["Jacob"]
 
         #Set Up Tabs
         self.tabs = QTabWidget()
@@ -44,6 +46,24 @@ class EventCreationWindow(QMainWindow):
         self.sponsorship_list_holder.setLayout(self.sponsorship_list_holder_layout)
         self.tabs.addTab(self.sponsorship_list_tab, "Sponsorship List")
 
+        #Set Up Attendee Tab
+        self.attendee_tab_layout = QVBoxLayout()
+        self.attendee_list_tab.setLayout(self.attendee_tab_layout)
+        self.attendee_input = QLineEdit()
+        self.attendee_button = QPushButton("Add Attendee")
+        self.attendee_tab_layout.addWidget(self.attendee_input)
+        self.attendee_tab_layout.addWidget(self.attendee_button)
+        self.attendee_holder_layout = QVBoxLayout()
+        self.scroll_attendee = QScrollArea()
+        self.attendee_list_holder = QWidget()
+        self.scroll_attendee.setWidget(self.attendee_list_holder)
+        for attendee in self.attendees:
+            widget = Attendee(attendee, self.sponsorship_levels)
+            self.attendee_holder_layout.addWidget(widget)
+        self.attendee_list_holder.setLayout(self.attendee_holder_layout)
+
+        self.attendee_tab_layout.addWidget(self.scroll_attendee)
+        self.tabs.addTab(self.attendee_list_tab, "Attendee Tab")
 
 
 
@@ -55,22 +75,6 @@ class EventCreationWindow(QMainWindow):
         self.tabs.addTab(self.launch_tab, "Launch Check in Session")
 
         self.setCentralWidget(self.tabs)
-"""
-        #Search Bar, Scroll Bar, and Check In List
-        self.check_in_list_layout = QVBoxLayout()
-        self._search_bar = QLineEdit()
-        self.check_in_list_holder = QWidget()
-        self.scroll = QScrollArea()
-        self.scroll.setWidgetResizable(True)
-        self.check_in_list_holder_layout = QVBoxLayout()
-        # Add a widget entry for each ticket
-        self.check_in_list_holder.setLayout(self.check_in_list_holder_layout)
-        self.scroll.setWidget(self.check_in_list_holder)
-        self.check_in_list_layout.addWidget(self._search_bar)
-        self.check_in_list_layout.addWidget(self.scroll)
-        self.check_in_list_tab.setLayout(self.check_in_list_layout)
-        self.tabs.addTab(self.check_in_list_tab, "Check In List")
-"""
 
 
 
