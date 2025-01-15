@@ -56,13 +56,12 @@ class EventCreationWindow(QMainWindow):
         self.attendee_holder_layout = QVBoxLayout()
         self.scroll_attendee = QScrollArea()
         self.attendee_list_holder = QWidget()
-        self.scroll_attendee.setWidget(self.attendee_list_holder)
+        self.attendee_tab_layout.addWidget(self.scroll_attendee)
         for attendee in self.attendees:
             widget = Attendee(attendee, self.sponsorship_levels)
             self.attendee_holder_layout.addWidget(widget)
         self.attendee_list_holder.setLayout(self.attendee_holder_layout)
-
-        self.attendee_tab_layout.addWidget(self.scroll_attendee)
+        self.scroll_attendee.setWidget(self.attendee_list_holder)
         self.tabs.addTab(self.attendee_list_tab, "Attendee Tab")
 
 
