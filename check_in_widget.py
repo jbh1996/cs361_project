@@ -8,15 +8,18 @@
 
 from PyQt6.QtWidgets import *
 
+class CheckIn(QWidget):
 
-class Check_In(QWidget):
-
-    def __init__(self, ticket_name):
+    def __init__(self, ticket_name, sponsorship_level):
         super().__init__()
         self._ticket_name = ticket_name
+        self._sponsorship_level = sponsorship_level
         self._checked_in = False
         self._layout = QHBoxLayout()
-        self._name_display = QLabel(ticket_name)
+        self._name_display = QLabel(self._ticket_name)
+        self._sponsorship_display = QLabel(self._sponsorship_level)
         self._button = QPushButton("Not Yet Checked In")
         self._layout.addWidget(self._name_display)
+        self._layout.addWidget(self._sponsorship_display)
         self._layout.addWidget(self._button)
+        self.setLayout(self._layout)
