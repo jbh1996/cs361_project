@@ -72,7 +72,6 @@ class EventCreationWindow(QMainWindow):
         self.launch_button = QPushButton("Launch Check in Session")
         self.launch_tab_layout.addWidget(self.launch_button)
         self.tabs.addTab(self.launch_tab, "Launch Check in Session")
-
         self.setCentralWidget(self.tabs)
 
 
