@@ -24,7 +24,7 @@ class EventCreationWindow(QMainWindow):
         self.sponsorship_tab_layout = QVBoxLayout()
         self.sponsorship_list_tab.setLayout(self.sponsorship_tab_layout)
         self.input_bar = QLineEdit()
-        self.add_button = QPushButton("Add Level")
+        self.add_button = QPushButton("Add Level", clicked= lambda: self.add_sponsorship_level())
         self.sponsorship_list_holder = QWidget()
         self.scroll_sponsorship = QScrollArea()
         self.sponsorship_list_holder_layout = QVBoxLayout()
@@ -50,7 +50,7 @@ class EventCreationWindow(QMainWindow):
         self.attendee_tab_layout = QVBoxLayout()
         self.attendee_list_tab.setLayout(self.attendee_tab_layout)
         self.attendee_input = QLineEdit()
-        self.attendee_button = QPushButton("Add Attendee")
+        self.attendee_button = QPushButton("Add Attendee", clicked= lambda: self.add_attendee())
         self.attendee_tab_layout.addWidget(self.attendee_input)
         self.attendee_tab_layout.addWidget(self.attendee_button)
         self.attendee_holder_layout = QVBoxLayout()
@@ -74,6 +74,19 @@ class EventCreationWindow(QMainWindow):
         self.tabs.addTab(self.launch_tab, "Launch Check in Session")
         self.setCentralWidget(self.tabs)
 
+    def add_attendee(self):
+        if self.attendee_input.text() == "":
+            return
+        else:
+            widget = Attendee(self.attendee_input.text(), self.sponsorship_levels)
+            self.attendee_holder_layout.addWidget(widget)
+
+    def add_sponsorship_level(self):
+        if self.input_bar.text() == "":
+            return
+        else:
+            widget = Sponsorship(self.input_bar.text())
+            self.sponsorship_list_holder_layout.addWidget(widget)
 
 app = QApplication(sys.argv)
 w = EventCreationWindow()

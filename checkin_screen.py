@@ -1,7 +1,6 @@
 import sys
 from PyQt6.QtWidgets import *
 from check_in_widget import CheckIn
-from PyQt6.QtCore import Qt
 
 
 
