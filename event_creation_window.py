@@ -51,17 +51,24 @@ class EventCreationWindow(QMainWindow):
         self.attendee_list_tab.setLayout(self.attendee_tab_layout)
         self.attendee_input = QLineEdit()
         self.attendee_button = QPushButton("Add Attendee", clicked= lambda: self.add_attendee())
+        self.attendee_list_holder = QWidget()
+        self.scroll_attendee = QScrollArea()
+        self.attendee_holder_layout = QVBoxLayout()
+
         self.attendee_tab_layout.addWidget(self.attendee_input)
         self.attendee_tab_layout.addWidget(self.attendee_button)
-        self.attendee_holder_layout = QVBoxLayout()
-        self.scroll_attendee = QScrollArea()
-        self.attendee_list_holder = QWidget()
+
+        self.scroll_attendee.setWidget(self.attendee_list_holder)
         self.attendee_tab_layout.addWidget(self.scroll_attendee)
+        self.scroll_attendee.setWidgetResizable(True)
+
+
         for attendee in self.attendees:
             widget = Attendee(attendee, self.sponsorship_levels)
             self.attendee_holder_layout.addWidget(widget)
+
+
         self.attendee_list_holder.setLayout(self.attendee_holder_layout)
-        self.scroll_attendee.setWidget(self.attendee_list_holder)
         self.tabs.addTab(self.attendee_list_tab, "Attendee Tab")
 
 
@@ -87,6 +94,10 @@ class EventCreationWindow(QMainWindow):
         else:
             widget = Sponsorship(self.input_bar.text())
             self.sponsorship_list_holder_layout.addWidget(widget)
+            for i in range(self.attendee_holder_layout.count()):
+                widget = self.attendee_holder_layout.itemAt(i)
+                widget.add_level(self.input_bar.text())
+
 
 
 app = QApplication(sys.argv)

@@ -5,8 +5,9 @@ class Sponsorship(QWidget):
     def __init__(self,sponsorship_name):
         super().__init__()
         self.ticket_amount = 1
+        self.sponsorship_name = sponsorship_name
         self._layout = QHBoxLayout()
-        self._name_display = QLabel(sponsorship_name)
+        self._name_display = QLabel(self.sponsorship_name)
         self.spin_box = QSpinBox()
         self.spin_box.setRange(1, 100)  # Set the range of values
         self.spin_box.setValue(1)     # Set the initial value
@@ -21,3 +22,11 @@ class Sponsorship(QWidget):
 
         self.deleteLater()
         return self._name_display
+
+    def get_ticket_amount(self):
+
+        return self.ticket_amount
+
+    def get_sponsorship_name(self):
+
+        return self.sponsorship_name

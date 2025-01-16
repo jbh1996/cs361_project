@@ -15,3 +15,7 @@ class Attendee(QWidget):
         self._layout.addWidget(self.dropdown_box)
         self._layout.addWidget(self._button)
         self.setLayout(self._layout)
+
+    def add_level(self,level):
+
+        self.dropdown_box.addItem(level)
