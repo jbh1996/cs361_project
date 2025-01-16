@@ -14,6 +14,9 @@ class EventCreationWindow(QMainWindow):
         self.sponsorship_levels = ["General Attendee"]
         self.attendees = ["Jacob"]
 
+        self.attendee_widgets = []
+        self.sponsorship_widgets = []
+
         #Set Up Tabs
         self.tabs = QTabWidget()
         self.sponsorship_list_tab = QWidget()
@@ -41,6 +44,7 @@ class EventCreationWindow(QMainWindow):
         #Add Sponsorship Levels from List
         for level in self.sponsorship_levels:
             widget = Sponsorship(level)
+            self.sponsorship_widgets.append(widget)
             self.sponsorship_list_holder_layout.addWidget(widget)
 
         self.sponsorship_list_holder.setLayout(self.sponsorship_list_holder_layout)
@@ -65,6 +69,7 @@ class EventCreationWindow(QMainWindow):
 
         for attendee in self.attendees:
             widget = Attendee(attendee, self.sponsorship_levels)
+            self.attendee_widgets.append(widget)
             self.attendee_holder_layout.addWidget(widget)
 
 
@@ -86,6 +91,7 @@ class EventCreationWindow(QMainWindow):
             return
         else:
             widget = Attendee(self.attendee_input.text(), self.sponsorship_levels)
+            self.attendee_widgets.append(widget)
             self.attendee_holder_layout.addWidget(widget)
 
     def add_sponsorship_level(self):
@@ -93,10 +99,16 @@ class EventCreationWindow(QMainWindow):
             return
         else:
             widget = Sponsorship(self.input_bar.text())
+            self.sponsorship_widgets.append(widget)
             self.sponsorship_list_holder_layout.addWidget(widget)
-            for i in range(self.attendee_holder_layout.count()):
-                widget = self.attendee_holder_layout.itemAt(i)
-                widget.add_level(self.input_bar.text())
+            self.sponsorship_levels.append(self.input_bar.text())
+            self.refresh_attendee_levels()
+
+    def refresh_attendee_levels(self):
+
+        for attendee_widget in self.attendee_widgets:
+            attendee_widget.update_levels(self.sponsorship_levels)
+
 
 
 
