@@ -20,3 +20,4 @@ class Sponsorship(QWidget):
     def delete(self):
 
         self.deleteLater()
+        return self._name_display
