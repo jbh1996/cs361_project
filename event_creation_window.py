@@ -12,7 +12,7 @@ class EventCreationWindow(QMainWindow):
         super().__init__(*args, **kwargs)
 
         self.sponsorship_levels = ["General Attendee"]
-        self.attendees = ["Jacob"]
+        self.attendees = []
 
         self.attendee_widgets = []
         self.sponsorship_widgets = []
@@ -43,7 +43,7 @@ class EventCreationWindow(QMainWindow):
 
         #Add Sponsorship Levels from List
         for level in self.sponsorship_levels:
-            widget = Sponsorship(level)
+            widget = Sponsorship(level, self)
             self.sponsorship_widgets.append(widget)
             self.sponsorship_list_holder_layout.addWidget(widget)
 
@@ -98,16 +98,25 @@ class EventCreationWindow(QMainWindow):
         if self.input_bar.text() == "":
             return
         else:
-            widget = Sponsorship(self.input_bar.text())
+            widget = Sponsorship(self.input_bar.text(), self)
             self.sponsorship_widgets.append(widget)
             self.sponsorship_list_holder_layout.addWidget(widget)
             self.sponsorship_levels.append(self.input_bar.text())
-            self.refresh_attendee_levels()
+            self.add_attendee_level(self.input_bar.text())
 
-    def refresh_attendee_levels(self):
+    def remove_sponsorhip_level(self, level, widget):
+
+        self.sponsorship_levels.remove(level)
+        self.sponsorship_widgets.remove(widget)
+        for attendee_widget in self.attendee_widgets:
+            attendee_widget.remove_level(level)
+
+    def add_attendee_level(self,level):
 
         for attendee_widget in self.attendee_widgets:
-            attendee_widget.update_levels(self.sponsorship_levels)
+            attendee_widget.add_level(level)
+
+
 
 
 

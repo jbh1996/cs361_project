@@ -16,10 +16,13 @@ class Attendee(QWidget):
         self._layout.addWidget(self._button)
         self.setLayout(self._layout)
 
-    def update_levels(self,level_list):
-        self.dropdown_box.clear()
-        for level in level_list:
-            self.dropdown_box.addItem(level)
+    def add_level(self,level):
+        self.dropdown_box.addItem(level)
+
+    def remove_level(self,level):
+        for num in range(self.dropdown_box.count()):
+            if self.dropdown_box.itemText(num) == level:
+                self.dropdown_box.removeItem(num)
 
     def delete(self):
 
