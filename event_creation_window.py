@@ -88,6 +88,7 @@ class EventCreationWindow(QMainWindow):
             widget = Sponsorship(self.input_bar.text())
             self.sponsorship_list_holder_layout.addWidget(widget)
 
+
 app = QApplication(sys.argv)
 w = EventCreationWindow()
 w.show()
