@@ -17,6 +17,9 @@ class Sponsorship(QWidget):
         self._layout.addWidget(self.spin_box)
         self._layout.addWidget(self._button)
         self.setLayout(self._layout)
+        if self.sponsorship_name == "General Admission":
+            self._button.deleteLater()
+            self._layout.addWidget(QLabel("Required Field"))
 
     def delete(self):
 
