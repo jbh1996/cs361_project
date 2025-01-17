@@ -18,8 +18,19 @@ class CheckIn(QWidget):
         self._layout = QHBoxLayout()
         self._name_display = QLabel(self._ticket_name)
         self._sponsorship_display = QLabel(self._sponsorship_level)
-        self._button = QPushButton("Not Yet Checked In")
+        self._button = QPushButton("Not Yet Checked In", clicked= lambda: self.clicked())
+        self._button.setStyleSheet("background-color: grey")
         self._layout.addWidget(self._name_display)
         self._layout.addWidget(self._sponsorship_display)
         self._layout.addWidget(self._button)
         self.setLayout(self._layout)
+
+    def clicked(self):
+        if self._button.text() == "Not Yet Checked In":
+            self._button.setText("Checked In")
+            self._button.setStyleSheet("background-color: green")
+        else:
+            self._button.setText("Not Yet Checked In")
+            self._button.setStyleSheet("background-color: grey")
+
+

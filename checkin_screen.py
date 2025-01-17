@@ -6,7 +6,7 @@ from check_in_widget import CheckIn
 
 
 class MainCheckInWindow(QMainWindow):
-    def __init__(self, ticket_list, *args, **kwargs):
+    def __init__(self, ticket_list, sponsorship_levels, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Set Up Ticket List
         self.ticket_list = ticket_list
@@ -46,7 +46,3 @@ class MainCheckInWindow(QMainWindow):
 
 
 
-app = QApplication(sys.argv)
-w = MainCheckInWindow([("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Bill", "General Admission"),("Sarah", "Silver Level"),("Sarah", "Silver Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Bill", "General Admission"),("Sarah", "Silver Level"),("Sarah", "Silver Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Bill", "General Admission"),("Sarah", "Silver Level"),("Sarah", "Silver Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Bill", "General Admission"),("Sarah", "Silver Level"),("Sarah", "Silver Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Jacob", "Gold Level"),("Bill", "General Admission"),("Sarah", "Silver Level"),("Sarah", "Silver Level")])
-w.show()
-sys.exit(app.exec())

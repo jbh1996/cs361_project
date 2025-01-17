@@ -5,7 +5,6 @@ class Sponsorship(QWidget):
     def __init__(self,sponsorship_name, parent):
         super().__init__()
         self.parent = parent
-        self.ticket_amount = 1
         self.sponsorship_name = sponsorship_name
         self._layout = QHBoxLayout()
         self._name_display = QLabel(self.sponsorship_name)
@@ -23,7 +22,8 @@ class Sponsorship(QWidget):
             self._layout.addWidget(QLabel("Required Field"))
 
     def delete(self):
-        self.parent.remove_sponsorhip_level(self.sponsorship_name, self)
+
+        self.parent.remove_sponsorship_level(self.sponsorship_name, self)
         self.deleteLater()
         return self._name_display
 
@@ -34,3 +34,7 @@ class Sponsorship(QWidget):
     def get_sponsorship_name(self):
 
         return self.sponsorship_name
+
+    def get_spin_box_value(self):
+
+        return self.spin_box.value()
