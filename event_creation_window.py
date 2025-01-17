@@ -38,6 +38,19 @@ class EventCreationWindow(QMainWindow):
         self.sponsorship_addition_layout.addWidget(self.add_button)
         self.sponsorship_tab_layout.addLayout(self.sponsorship_addition_layout)
 
+        # Set Up Labels
+        self.sponsorship_labels = QHBoxLayout()
+        self.sponsorship_label_one = QLabel("Sponsorship Level")
+        self.sponsorship_label_two = QLabel("Tickets per Level")
+        self.sponsorship_label_three = QLabel("Delete?")
+        self.sponsorship_labels.addWidget(self.sponsorship_label_one)
+        self.sponsorship_labels.addWidget(self.sponsorship_label_two)
+        self.sponsorship_labels.addWidget(self.sponsorship_label_three)
+        self.sponsorship_tab_layout.addLayout(self.sponsorship_labels)
+
+
+
+
         #set scroll to sponsorship levels
         self.scroll_sponsorship.setWidget(self.sponsorship_list_holder)
         self.sponsorship_tab_layout.addWidget(self.scroll_sponsorship)
@@ -65,6 +78,16 @@ class EventCreationWindow(QMainWindow):
         self.attendee_addition_layout.addWidget(self.attendee_input)
         self.attendee_addition_layout.addWidget(self.attendee_button)
         self.attendee_tab_layout.addLayout(self.attendee_addition_layout)
+
+        # Set Up Labels
+        self.attendee_labels = QHBoxLayout()
+        self.attendee_label_one = QLabel("Attendee Name")
+        self.attendee_label_two = QLabel("Sponsorship Level")
+        self.attendee_label_three = QLabel("Delete?")
+        self.attendee_labels.addWidget(self.attendee_label_one)
+        self.attendee_labels.addWidget(self.attendee_label_two)
+        self.attendee_labels.addWidget(self.attendee_label_three)
+        self.attendee_tab_layout.addLayout(self.attendee_labels)
 
         self.scroll_attendee.setWidget(self.attendee_list_holder)
         self.attendee_tab_layout.addWidget(self.scroll_attendee)

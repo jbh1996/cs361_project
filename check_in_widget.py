@@ -33,4 +33,8 @@ class CheckIn(QWidget):
             self._button.setText("Not Yet Checked In")
             self._button.setStyleSheet("background-color: grey")
 
+    def get_attendee_name(self):
+
+        return self._ticket_name
+
 
