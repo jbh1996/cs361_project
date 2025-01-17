@@ -3,7 +3,6 @@ from PyQt6.QtWidgets import *
 from sponsorship_widget import Sponsorship
 from attendee_widget import Attendee
 from checkin_screen import MainCheckInWindow
-from PyQt6.QtCore import Qt
 
 
 
