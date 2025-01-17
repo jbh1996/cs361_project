@@ -12,7 +12,7 @@ class Attendee(QWidget):
         self.parent = parent
         for level in level_list:
             self.dropdown_box.addItem(level)
-        self._button = QPushButton("Delete", clicked= lambda: self.delete())
+        self._button = QPushButton("Delete", clicked=  lambda: self.delete())
         self._layout.addWidget(self._name_display)
         self._layout.addWidget(self.dropdown_box)
         self._layout.addWidget(self._button)

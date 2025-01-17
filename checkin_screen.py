@@ -20,6 +20,7 @@ class MainCheckInWindow(QMainWindow):
         #Search Bar, Scroll Bar, and Check In List
         self.check_in_list_layout = QVBoxLayout()
         self._search_bar = QLineEdit(textChanged= lambda: self.filter())
+        self._search_bar.setPlaceholderText("Search for Attendee Name Here")
         self.check_in_list_holder = QWidget()
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
@@ -37,6 +38,8 @@ class MainCheckInWindow(QMainWindow):
         self.search_bar_layout.addWidget(self._search_bar)
         self.check_in_list_layout.addLayout(self.search_bar_layout)
         self.filter_dropdown = QComboBox()
+        self.filter_dropdown = QComboBox(currentTextChanged =  lambda: self.filter_by_sponsorship())
+        self.filter_dropdown.addItem("All Sponsorship Levels")
         for level in sponsorship_levels:
             self.filter_dropdown.addItem(level)
         self.filter_layout = QHBoxLayout()
@@ -71,6 +74,20 @@ class MainCheckInWindow(QMainWindow):
                 widget.show()
             else:
                 widget.hide()
+
+    def filter_by_sponsorship(self):
+
+        if self.filter_dropdown.currentText() == "All Sponsorship Levels":
+            for widget in self.widgets:
+                widget.show()
+        else:
+            for widget in self.widgets:
+                if widget.get_sponsorship_level() == self.filter_dropdown.currentText():
+                    widget.show()
+                else:
+                    widget.hide()
+
+
 
 
 

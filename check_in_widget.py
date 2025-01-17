@@ -37,4 +37,8 @@ class CheckIn(QWidget):
 
         return self._ticket_name
 
+    def get_sponsorship_level(self):
+
+        return self._sponsorship_level
+
 
