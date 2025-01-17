@@ -18,6 +18,7 @@ class EventCreationWindow(QMainWindow):
 
         #Set Up Tabs
         self.tabs = QTabWidget()
+        self.showMaximized()
         self.sponsorship_list_tab = QWidget()
         self.attendee_list_tab = QWidget()
         self.launch_tab = QWidget()
@@ -156,7 +157,7 @@ class EventCreationWindow(QMainWindow):
                 ticket_array.append((widget.get_attendee_name(), widget.get_sponsorship_level()))
 
         self.window = MainCheckInWindow(ticket_array, self.sponsorship_levels)
-        self.window.show()
+        self.window.showMaximized()
 
 app = QApplication(sys.argv)
 w = EventCreationWindow()
