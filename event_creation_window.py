@@ -26,7 +26,7 @@ class EventCreationWindow(QMainWindow):
         #Set Up Sponsorship List Tab Widgets and Layouts
         self.sponsorship_tab_layout = QVBoxLayout()
         self.sponsorship_list_tab.setLayout(self.sponsorship_tab_layout)
-        self.input_bar = QLineEdit()
+        self.input_bar = QLineEdit(returnPressed= lambda: self.add_sponsorship_level())
         self.input_bar.setPlaceholderText("Enter Your Sponsorship Level Name Here")
         self.add_button = QPushButton("Add Level", clicked= lambda: self.add_sponsorship_level())
         self.sponsorship_list_holder = QWidget()
@@ -43,7 +43,7 @@ class EventCreationWindow(QMainWindow):
         self.sponsorship_labels = QHBoxLayout()
         self.sponsorship_label_one = QLabel("Sponsorship Level")
         self.sponsorship_label_two = QLabel("Tickets per Level")
-        self.sponsorship_label_three = QLabel("Delete?")
+        self.sponsorship_label_three = QLabel("Delete: Warning! This will affect all attendee dropdowns.")
         self.sponsorship_labels.addWidget(self.sponsorship_label_one)
         self.sponsorship_labels.addWidget(self.sponsorship_label_two)
         self.sponsorship_labels.addWidget(self.sponsorship_label_three)
@@ -69,7 +69,7 @@ class EventCreationWindow(QMainWindow):
         #Set Up Attendee Tab
         self.attendee_tab_layout = QVBoxLayout()
         self.attendee_list_tab.setLayout(self.attendee_tab_layout)
-        self.attendee_input = QLineEdit()
+        self.attendee_input = QLineEdit(returnPressed= lambda: self.add_attendee())
         self.attendee_input.setPlaceholderText("Enter Your Attendee Name Here")
         self.attendee_button = QPushButton("Add Attendee", clicked= lambda: self.add_attendee())
         self.attendee_list_holder = QWidget()
