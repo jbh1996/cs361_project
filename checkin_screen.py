@@ -5,6 +5,8 @@ from check_in_widget import CheckIn
 from sponsorship_level_progress import SponsorshipProgress
 import zmq
 
+context = zmq.Context()
+
 
 class MainCheckInWindow(QMainWindow):
     def __init__(self, ticket_list, sponsorship_levels, *args, **kwargs):
@@ -108,11 +110,10 @@ class MainCheckInWindow(QMainWindow):
             append_string = widget.get_sponsorship_level()+ ";" + str(widget.get_check_in_status()) + ","
             message_string += append_string
 
-        context = zmq.Context()
-        socket = context.socket(zmq.REP)
-        socket.bind("tcp://:5555")
+        socket = context.socket(zmq.REQ)
+        socket.bind("tcp://localhost:5555")
         socket.send_string(message_string)
-        json_string = socket.recv_string()
+        json_string = socket.recv()
         response_dict = json.loads(json_string)
         for widget in self.sponsorship_level_progress_widgets:
             if widget.get_sponsorship_level() in response_dict:
