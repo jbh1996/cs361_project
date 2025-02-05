@@ -110,11 +110,13 @@ class MainCheckInWindow(QMainWindow):
 
         context = zmq.Context()
         socket = context.socket(zmq.REP)
-        socket.bind("tcp://*:5556")
+        socket.bind("tcp://:5555")
         socket.send_string(message_string)
         json_string = socket.recv_string()
         response_dict = json.loads(json_string)
-
+        for widget in self.sponsorship_level_progress_widgets:
+            if widget.get_sponsorship_level() in response_dict:
+                widget.update_progress(response_dict[widget.get_sponsorship_level()])
 
     def filter_by_sponsorship(self):
 

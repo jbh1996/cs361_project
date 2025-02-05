@@ -4,8 +4,9 @@ import json
 
 
 context = zmq.Context()
-socket = context.socket(zmq.REQ)
-socket.connect("tcp://localhost:5556")
+socket = context.socket(zmq.REP)
+socket.bind("tcp://*:5555")
+
 while True:
     message = socket.recv_string()
     working_array = message.split(",")
@@ -26,6 +27,5 @@ while True:
             response_dict[entry_array[0]] = 1
     for key in response_dict:
         response_dict[key] = response_dict[key] / total_dict[key]
-
     time.sleep(0.1)
     socket.send_string(json.dumps(response_dict))
