@@ -86,6 +86,10 @@ class MainCheckInWindow(QMainWindow):
         self.progress_list_holder.setLayout(self.progress_holder_layout)
         self.scroll_progress.setWidget(self.progress_list_holder)
         self.status_tab_layout.addWidget(self.refresh_button)
+        self.progress_labels = QHBoxLayout()
+        self.progress_labels.addWidget(QLabel("Sponsorship Level"))
+        self.progress_labels.addWidget(QLabel("Percentage Checked In"))
+        self.status_tab_layout.addLayout(self.progress_labels)
         self.status_tab_layout.addWidget(self.scroll_progress)
 
         self.setCentralWidget(self.tabs)
