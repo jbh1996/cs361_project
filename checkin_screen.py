@@ -73,7 +73,7 @@ class MainCheckInWindow(QMainWindow):
         # Set Up Progress by Sponsorship Level
         self.status_tab_layout = QVBoxLayout()
         self.status_tab.setLayout(self.status_tab_layout)
-        self.tabs.addTab(self.status_tabb, "View Check In Status by Sponsorship Level")
+        self.tabs.addTab(self.status_tab, "View Check In Status by Sponsorship Level")
         self.refresh_button = QPushButton("Refresh")
         self.progress_list_holder = QWidget()
         self.scroll_progress = QScrollArea()
