@@ -1,3 +1,4 @@
+import json
 import sys
 from PyQt6.QtWidgets import *
 from check_in_widget import CheckIn
@@ -111,7 +112,9 @@ class MainCheckInWindow(QMainWindow):
         socket = context.socket(zmq.REP)
         socket.bind("tcp://*:5556")
         socket.send_string(message_string)
-        socket.recv_string()
+        json_string = socket.recv_string()
+        response_dict = json.loads(json_string)
+
 
     def filter_by_sponsorship(self):
 
