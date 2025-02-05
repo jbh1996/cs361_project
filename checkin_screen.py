@@ -19,6 +19,8 @@ class MainCheckInWindow(QMainWindow):
         self.close_tab = QWidget()
         self.status_tab = QWidget()
         self.time_tab = QWidget()
+        self.csv_tab = QWidget()
+
 
         #Search Bar, Scroll Bar, and Check In List
         self.check_in_list_layout = QVBoxLayout()
@@ -119,6 +121,13 @@ class MainCheckInWindow(QMainWindow):
         self.time_tab_layout.addLayout(self.time_remaining_layout)
         self.time_tab_layout.addLayout(self.time_elapsed_layout)
         self.tabs.addTab(self.time_tab, "Time Information")
+
+        # Set Up CSV Tab
+        self.csv_tab_layout = QVBoxLayout()
+        self.csv_tab.setLayout(self.csv_tab_layout)
+        self.csv_button = QPushButton("Generate CSV")
+        self.csv_tab_layout.addWidget(self.csv_button)
+        self.tabs.addTab(self.csv_tab, "Export CSV")
 
         self.setCentralWidget(self.tabs)
 
