@@ -3,6 +3,7 @@
 from PyQt6.QtWidgets import *
 import time
 
+
 class SponsorshipProgress(QWidget):
 
     def __init__(self, sponsorship_level):

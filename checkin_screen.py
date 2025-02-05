@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtWidgets import *
 from check_in_widget import CheckIn
-
+from sponsorship_level_progress import SponsorshipProgress
 
 
 
@@ -70,14 +70,23 @@ class MainCheckInWindow(QMainWindow):
         self.close_tab_layout.addWidget(self.close_warning)
         self.tabs.addTab(self.close_tab, "End Check In Session")
 
-        # View Checkin Progress by Sponsorship Level
+        # Set Up Progress by Sponsorship Level
         self.status_tab_layout = QVBoxLayout()
         self.status_tab.setLayout(self.status_tab_layout)
-        self.tabs.addTab(self.close_tab, "View Check In Status by Sponsorship Level")
+        self.tabs.addTab(self.status_tabb, "View Check In Status by Sponsorship Level")
         self.refresh_button = QPushButton("Refresh")
+        self.progress_list_holder = QWidget()
+        self.scroll_progress = QScrollArea()
+        self.scroll_progress.setWidgetResizable(True)
+        self.progress_holder_layout = QVBoxLayout()
         for level in sponsorship_levels:
             addition = SponsorshipProgress(level)
-            spon
+            self.sponsorship_level_progress_widgets.append(addition)
+            self.progress_holder_layout.addWidget(addition)
+        self.progress_list_holder.setLayout(self.progress_holder_layout)
+        self.scroll_progress.setWidget(self.progress_list_holder)
+        self.status_tab_layout.addWidget(self.refresh_button)
+        self.status_tab_layout.addWidget(self.scroll_progress)
 
         self.setCentralWidget(self.tabs)
 
