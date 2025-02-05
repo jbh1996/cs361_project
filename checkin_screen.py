@@ -11,6 +11,7 @@ class MainCheckInWindow(QMainWindow):
         # Set Up Ticket List
         self.ticket_list = ticket_list
         self.widgets = []
+        self.sponsorship_level_progress_widgets = []
 
         #Set Up Tabs
         self.tabs = QTabWidget()
@@ -72,7 +73,11 @@ class MainCheckInWindow(QMainWindow):
         # View Checkin Progress by Sponsorship Level
         self.status_tab_layout = QVBoxLayout()
         self.status_tab.setLayout(self.status_tab_layout)
-        self.tabs.addTab(self.close_tab, "View Check In Status")
+        self.tabs.addTab(self.close_tab, "View Check In Status by Sponsorship Level")
+        self.refresh_button = QPushButton("Refresh")
+        for level in sponsorship_levels:
+            addition = SponsorshipProgress(level)
+            spon
 
         self.setCentralWidget(self.tabs)
 
