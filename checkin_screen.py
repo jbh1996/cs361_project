@@ -104,7 +104,7 @@ class MainCheckInWindow(QMainWindow):
     def get_progress(self):
         message_string = ""
         for widget in self.widgets:
-            append_string = widget.get_sponsorship_level()+ " " + str(widget.get_check_in_status()) + ","
+            append_string = widget.get_sponsorship_level()+ ";" + str(widget.get_check_in_status()) + ","
             message_string += append_string
 
         context = zmq.Context()
