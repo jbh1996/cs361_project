@@ -5,9 +5,6 @@ from check_in_widget import CheckIn
 from sponsorship_level_progress import SponsorshipProgress
 import zmq
 
-context = zmq.Context()
-
-
 class MainCheckInWindow(QMainWindow):
     def __init__(self, ticket_list, sponsorship_levels, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,6 +18,7 @@ class MainCheckInWindow(QMainWindow):
         self.check_in_list_tab = QWidget()
         self.close_tab = QWidget()
         self.status_tab = QWidget()
+        self.time_tab = QWidget()
 
         #Search Bar, Scroll Bar, and Check In List
         self.check_in_list_layout = QVBoxLayout()
@@ -95,8 +93,37 @@ class MainCheckInWindow(QMainWindow):
         self.status_tab_layout.addLayout(self.progress_labels)
         self.status_tab_layout.addWidget(self.scroll_progress)
 
+        # Set Up Time Tab
+        self.time_tab_layout = QVBoxLayout()
+        self.time_tab.setLayout(self.time_tab_layout)
+        self.time_settings_layout = QHBoxLayout()
+        self.time_settings_label = QLabel("Minutes for Open Check-In:")
+        self.time_spin_box = QSpinBox()
+        self.time_spin_box.setRange(15, 300)
+        self.time_spin_box.setValue(15)
+        self.time_refresh_button = QPushButton("Refresh Time Window", clicked = lambda: self.time_refresh())
+        self.time_settings_layout.addWidget(self.time_settings_label)
+        self.time_settings_layout.addWidget(self.time_spin_box)
+        self.time_settings_layout.addWidget(self.time_refresh_button)
+        self.time_remaining_layout = QHBoxLayout()
+        self.time_remaining_label = QLabel("Time Remaining: ")
+        self.time_remaining_clock = QLabel("Click Refresh to See Remaining Time")
+        self.time_remaining_layout.addWidget(self.time_remaining_label)
+        self.time_elapsed_layout = QHBoxLayout()
+        self.time_elapsed_label = QLabel("Time Elapsed: ")
+        self.time_elapsed_clock = QLabel("Click Refresh to See Elapsed Time")
+        self.time_elapsed_layout.addWidget(self.time_elapsed_label)
+        self.time_elapsed_layout.addWidget(self.time_elapsed_clock)
+        self.time_tab_layout.addLayout(self.time_settings_layout)
+        self.time_tab_layout.addLayout(self.time_remaining_layout)
+        self.time_tab_layout.addLayout(self.time_elapsed_layout)
+        self.tabs.addTab(self.time_tab, "Time Information")
+
         self.setCentralWidget(self.tabs)
 
+
+    def time_refresh(self):
+        pass
     def filter(self):
         for widget in self.widgets:
             if self._search_bar.text() in widget.get_attendee_name():
@@ -110,10 +137,11 @@ class MainCheckInWindow(QMainWindow):
             append_string = widget.get_sponsorship_level()+ ";" + str(widget.get_check_in_status()) + ","
             message_string += append_string
 
+        context = zmq.Context()
         socket = context.socket(zmq.REQ)
-        socket.bind("tcp://localhost:5555")
+        socket.connect("tcp://localhost:5555")
         socket.send_string(message_string)
-        json_string = socket.recv()
+        json_string = socket.recv_string()
         response_dict = json.loads(json_string)
         for widget in self.sponsorship_level_progress_widgets:
             if widget.get_sponsorship_level() in response_dict:

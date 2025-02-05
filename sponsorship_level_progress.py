@@ -20,6 +20,7 @@ class SponsorshipProgress(QWidget):
     def update_progress(self, updated_number):
         """Update Progress"""
         self._progress = updated_number
+        self._progress_display.setText(str(round(self._progress)))
 
     def get_sponsorship_level(self):
 
