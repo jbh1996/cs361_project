@@ -109,6 +109,7 @@ class MainCheckInWindow(QMainWindow):
         self.time_remaining_label = QLabel("Time Remaining: ")
         self.time_remaining_clock = QLabel("Click Refresh to See Remaining Time")
         self.time_remaining_layout.addWidget(self.time_remaining_label)
+        self.time_remaining_layout.addWidget(self.time_remaining_clock)
         self.time_elapsed_layout = QHBoxLayout()
         self.time_elapsed_label = QLabel("Time Elapsed: ")
         self.time_elapsed_clock = QLabel("Click Refresh to See Elapsed Time")
