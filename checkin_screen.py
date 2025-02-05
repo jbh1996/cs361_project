@@ -74,7 +74,7 @@ class MainCheckInWindow(QMainWindow):
         self.status_tab_layout = QVBoxLayout()
         self.status_tab.setLayout(self.status_tab_layout)
         self.tabs.addTab(self.status_tab, "View Check In Status by Sponsorship Level")
-        self.refresh_button = QPushButton("Refresh")
+        self.refresh_button = QPushButton("Refresh", clicked= lambda: self.get_progress())
         self.progress_list_holder = QWidget()
         self.scroll_progress = QScrollArea()
         self.scroll_progress.setWidgetResizable(True)
@@ -100,6 +100,9 @@ class MainCheckInWindow(QMainWindow):
                 widget.show()
             else:
                 widget.hide()
+
+    def get_progress(self):
+        pass
 
     def filter_by_sponsorship(self):
 
