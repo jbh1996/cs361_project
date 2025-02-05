@@ -16,6 +16,7 @@ class MainCheckInWindow(QMainWindow):
         self.tabs = QTabWidget()
         self.check_in_list_tab = QWidget()
         self.close_tab = QWidget()
+        self.status_tab = QWidget()
 
         #Search Bar, Scroll Bar, and Check In List
         self.check_in_list_layout = QVBoxLayout()
@@ -67,6 +68,11 @@ class MainCheckInWindow(QMainWindow):
         self.close_warning = QLabel("Warning! You will use all your check in statuses if you decide to close!")
         self.close_tab_layout.addWidget(self.close_warning)
         self.tabs.addTab(self.close_tab, "End Check In Session")
+
+        # View Checkin Progress by Sponsorship Level
+        self.status_tab_layout = QVBoxLayout()
+        self.status_tab.setLayout(self.status_tab_layout)
+        self.tabs.addTab(self.close_tab, "View Check In Status")
 
         self.setCentralWidget(self.tabs)
 

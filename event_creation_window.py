@@ -128,6 +128,7 @@ class EventCreationWindow(QMainWindow):
             self.sponsorship_list_holder_layout.addWidget(widget)
             self.sponsorship_levels.append(self.input_bar.text())
             self.add_attendee_level(self.input_bar.text())
+            self.input_bar.setText("")
 
     def remove_sponsorship_level(self, level, widget):
 

@@ -7,6 +7,7 @@
 
 
 from PyQt6.QtWidgets import *
+import time
 
 class CheckIn(QWidget):
 
@@ -15,6 +16,7 @@ class CheckIn(QWidget):
         self._ticket_name = ticket_name
         self._sponsorship_level = sponsorship_level
         self._checked_in = False
+        self._check_in_time = None
         self._layout = QHBoxLayout()
         self._name_display = QLabel(self._ticket_name)
         self._sponsorship_display = QLabel(self._sponsorship_level)
@@ -29,9 +31,11 @@ class CheckIn(QWidget):
         if self._button.text() == "Not Yet Checked In":
             self._button.setText("Checked In")
             self._button.setStyleSheet("background-color: green")
+            self._check_in_time = time.time()
         else:
             self._button.setText("Not Yet Checked In")
             self._button.setStyleSheet("background-color: grey")
+            self._check_in_time = None
 
     def get_attendee_name(self):
 
@@ -40,5 +44,13 @@ class CheckIn(QWidget):
     def get_sponsorship_level(self):
 
         return self._sponsorship_level
+
+    def get_check_in_status(self):
+
+        return self._button.text() == "Checked In"
+
+    def get_check_in_time(self):
+
+        return self._check_in_time
 
 
