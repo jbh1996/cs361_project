@@ -2,7 +2,7 @@ import sys
 from PyQt6.QtWidgets import *
 from check_in_widget import CheckIn
 from sponsorship_level_progress import SponsorshipProgress
-
+import zmq
 
 
 class MainCheckInWindow(QMainWindow):
@@ -102,7 +102,16 @@ class MainCheckInWindow(QMainWindow):
                 widget.hide()
 
     def get_progress(self):
-        pass
+        message_string = ""
+        for widget in self.widgets:
+            append_string = widget.get_sponsorship_level()+ " " + str(widget.get_check_in_status()) + ","
+            message_string += append_string
+
+        context = zmq.Context()
+        socket = context.socket(zmq.REP)
+        socket.bind("tcp://*:5556")
+        socket.send_string(message_string)
+        socket.recv_string()
 
     def filter_by_sponsorship(self):
 
