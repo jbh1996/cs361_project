@@ -75,7 +75,6 @@ class EventCreationWindow(QMainWindow):
         self.attendee_list_holder = QWidget()
         self.scroll_attendee = QScrollArea()
         self.attendee_holder_layout = QVBoxLayout()
-
         self.attendee_addition_layout = QHBoxLayout()
         self.attendee_addition_layout.addWidget(self.attendee_input)
         self.attendee_addition_layout.addWidget(self.attendee_button)
@@ -90,16 +89,11 @@ class EventCreationWindow(QMainWindow):
         self.attendee_labels.addWidget(self.attendee_label_two)
         self.attendee_labels.addWidget(self.attendee_label_three)
         self.attendee_tab_layout.addLayout(self.attendee_labels)
-
         self.scroll_attendee.setWidget(self.attendee_list_holder)
         self.attendee_tab_layout.addWidget(self.scroll_attendee)
         self.scroll_attendee.setWidgetResizable(True)
-
-
         self.attendee_list_holder.setLayout(self.attendee_holder_layout)
         self.tabs.addTab(self.attendee_list_tab, "Step 2: Add Attendees")
-
-
 
         # Set Up Launch Tab
         self.launch_tab_layout = QVBoxLayout()
