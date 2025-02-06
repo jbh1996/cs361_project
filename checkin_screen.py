@@ -125,7 +125,7 @@ class MainCheckInWindow(QMainWindow):
         # Set Up CSV Tab
         self.csv_tab_layout = QVBoxLayout()
         self.csv_tab.setLayout(self.csv_tab_layout)
-        self.csv_button = QPushButton("Generate CSV")
+        self.csv_button = QPushButton("Generate CSV", clicked= lambda: self.generate_csv())
         self.csv_tab_layout.addWidget(self.csv_button)
         self.tabs.addTab(self.csv_tab, "Export CSV")
 
@@ -134,6 +134,24 @@ class MainCheckInWindow(QMainWindow):
 
     def time_refresh(self):
         pass
+
+    def generate_csv(self):
+        send_array = []
+        for widget in self.widgets:
+            append_array = []
+            append_array.append(widget.get_attendee_name())
+            append_array.append(widget.get_sponsorship_level())
+            append_array.append(widget.get_check_in_status())
+            append_array.append(widget.get_check_in_time())
+            send_array.append(append_array)
+        message_string = json.dumps(send_array)
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect("tcp://localhost:5556")
+        socket.send_string(message_string)
+        csv_string = socket.recv_string()
+        print(csv_string)
+
     def filter(self):
         for widget in self.widgets:
             if self._search_bar.text() in widget.get_attendee_name():
