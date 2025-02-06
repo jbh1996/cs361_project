@@ -69,16 +69,6 @@ class MainCheckInWindow(QMainWindow):
         self.check_in_list_tab.setLayout(self.check_in_list_layout)
         self.tabs.addTab(self.check_in_list_tab, "Check In List")
 
-        # Set Up Close Tab
-        self.close_tab_layout = QVBoxLayout()
-        self.close_tab.setLayout(self.close_tab_layout)
-        self.close_button = QPushButton("Close Check in Session")
-        self.close_tab_layout.addWidget(self.close_button)
-        self.close_warning = QLabel("Warning! You will use all your check in statuses if you decide to close!")
-        self.close_tab_layout.addWidget(self.close_warning)
-        self.tabs.addTab(self.close_tab, "End Check In Session")
-
-
         # Set Up Monitor Tab
         self.monitor_layout = QVBoxLayout()
         self.monitor_tab.setLayout(self.monitor_layout)
@@ -161,6 +151,17 @@ class MainCheckInWindow(QMainWindow):
         self.csv_button = QPushButton("Generate CSV", clicked= lambda: self.generate_csv())
         self.csv_tab_layout.addWidget(self.csv_button)
         self.tabs.addTab(self.csv_tab, "Export CSV")
+
+
+        # Set Up Close Tab
+        self.close_tab_layout = QVBoxLayout()
+        self.close_tab.setLayout(self.close_tab_layout)
+        self.close_button = QPushButton("Close Check in Session")
+        self.close_tab_layout.addWidget(self.close_button)
+        self.close_warning = QLabel("Warning! You will use all your check in statuses if you decide to close!")
+        self.close_tab_layout.addWidget(self.close_warning)
+        self.tabs.addTab(self.close_tab, "End Check In Session")
+
 
         self.setCentralWidget(self.tabs)
 
