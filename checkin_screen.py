@@ -4,6 +4,8 @@ from PyQt6.QtWidgets import *
 from check_in_widget import CheckIn
 from sponsorship_level_progress import SponsorshipProgress
 import zmq
+import datetime
+import csv
 
 class MainCheckInWindow(QMainWindow):
     def __init__(self, ticket_list, sponsorship_levels, *args, **kwargs):
@@ -150,7 +152,12 @@ class MainCheckInWindow(QMainWindow):
         socket.connect("tcp://localhost:5556")
         socket.send_string(message_string)
         csv_string = socket.recv_string()
-        print(csv_string)
+        with open(f"{datetime.datetime.now()}CheckInStatus.csv", "w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            rows = csv_string.split("\n")
+            for row in rows:
+                fields = row.split(",")
+                writer.writerow(fields)
 
     def filter(self):
         for widget in self.widgets:
