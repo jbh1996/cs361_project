@@ -110,6 +110,7 @@ class EventCreationWindow(QMainWindow):
             widget = Attendee(self.attendee_input.text(), self.sponsorship_levels, self)
             self.attendee_widgets.append(widget)
             self.attendee_holder_layout.addWidget(widget)
+            self.attendee_input.setText("")
 
     def add_sponsorship_level(self):
         if self.input_bar.text() == "":
