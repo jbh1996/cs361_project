@@ -3,6 +3,7 @@ import sys
 from PyQt6.QtWidgets import *
 from check_in_widget import CheckIn
 from sponsorship_level_progress import SponsorshipProgress
+from Attendee_Monitior_Widget import AttendeeMonitor
 import zmq
 import datetime
 import csv
@@ -22,6 +23,7 @@ class MainCheckInWindow(QMainWindow):
         self.status_tab = QWidget()
         self.time_tab = QWidget()
         self.csv_tab = QWidget()
+        self.monitor_tab = QWidget()
 
 
         #Search Bar, Scroll Bar, and Check In List
@@ -74,6 +76,33 @@ class MainCheckInWindow(QMainWindow):
         self.close_warning = QLabel("Warning! You will use all your check in statuses if you decide to close!")
         self.close_tab_layout.addWidget(self.close_warning)
         self.tabs.addTab(self.close_tab, "End Check In Session")
+
+
+        # Set Up Monitor Tab
+        self.monitor_layout = QVBoxLayout()
+        self.monitor_tab.setLayout(self.monitor_layout)
+        self.tabs.addTab(self.status_tab, "View Latest Checkins")
+        self.monitor_strip_layout = QHBoxLayout()
+        self.monitor_spin_box_label = QLabel("See attendees checked in for the past X minutes:")
+        self.monitor_spin_box = QSpinBox()
+        self.monitor_spin_box.setRange(1, 300)
+        self.monitor_spin_box.setValue(1)
+        self.monitor_button = QPushButton("Refresh", clicked= lambda: self.get_latest_checkins())
+        self.monitor_strip_layout.addWidget(self.monitor_spin_box_label)
+        self.monitor_strip_layout.addWidget(self.monitor_spin_box)
+        self.monitor_strip_layout.addWidget(self.monitor_button)
+        self.monitor_list_holder = QWidget()
+        self.scroll_monitor = QScrollArea()
+        self.scroll_monitor.setWidgetResizable(True)
+        self.monitor_holder_layout = QVBoxLayout()
+        self.monitor_list_holder.setLayout(self.monitor_holder_layout)
+        self.scroll_monitor.setWidget(self.monitor_list_holder)
+        self.monitor_labels = QHBoxLayout()
+        self.monitor_labels.addWidget(QLabel("Attendee Name"))
+        self.monitor_labels.addWidget(QLabel("Sponsorship Level"))
+        self.monitor_layout.addLayout(self.monitor_strip_layout)
+        self.monitor_layout.addLayout(self.monitor_labels)
+        self.monitor_layout.addWidget(self.scroll_monitor)
 
         # Set Up Progress by Sponsorship Level
         self.status_tab_layout = QVBoxLayout()
@@ -165,6 +194,9 @@ class MainCheckInWindow(QMainWindow):
                 widget.show()
             else:
                 widget.hide()
+
+    def get_latest_checkins(self):
+        pass
 
     def get_progress(self):
         message_string = ""
