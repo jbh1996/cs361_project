@@ -103,6 +103,7 @@ class MainCheckInWindow(QMainWindow):
         self.monitor_layout.addLayout(self.monitor_strip_layout)
         self.monitor_layout.addLayout(self.monitor_labels)
         self.monitor_layout.addWidget(self.scroll_monitor)
+        self.tabs.addTab(self.monitor_tab, "View Latest Checkins")
 
         # Set Up Progress by Sponsorship Level
         self.status_tab_layout = QVBoxLayout()
