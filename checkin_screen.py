@@ -184,6 +184,11 @@ class MainCheckInWindow(QMainWindow):
         socket = context.socket(zmq.REQ)
         socket.connect("tcp://localhost:5557")
         socket.send_string(message_string)
+        json_string = socket.recv_string()
+        response_array = json.loads(json_string)
+        for value in response_array:
+            widget = AttendeeMonitor(value[0],value[1])
+            self.monitor_holder_layout.addWidget(widget)
 
     def generate_csv(self):
         send_array = []
