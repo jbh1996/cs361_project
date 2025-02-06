@@ -13,6 +13,7 @@ class MainCheckInWindow(QMainWindow):
         super().__init__(*args, **kwargs)
         # Set Up Ticket List
         self.ticket_list = ticket_list
+        self.latest_widgets = []
         self.widgets = []
         self.sponsorship_level_progress_widgets = []
 
@@ -165,7 +166,24 @@ class MainCheckInWindow(QMainWindow):
 
 
     def time_refresh(self):
-        pass
+
+        for widget in self.latest_widgets:
+            widget.deleteLater()
+        self.latest_widgets = []
+        send_array = []
+        for widget in self.widgets:
+            if widget.get_check_in_status():
+                send_array.append([widget.get_attendee_name(), widget.get_sponsorship_level(), widget.get_check_in_time()])
+        time_in_seconds = self.monitor_spin_box.value() * 60
+        sending_dict = {
+            "window": time_in_seconds
+            "array": send_array
+        }
+        message_string = json.dumps(sending_dict)
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect("tcp://localhost:5557")
+        socket.send_string(message_string)
 
     def generate_csv(self):
         send_array = []
