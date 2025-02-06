@@ -165,7 +165,7 @@ class MainCheckInWindow(QMainWindow):
         self.setCentralWidget(self.tabs)
 
 
-    def time_refresh(self):
+    def get_latest_checkins(self):
 
         for widget in self.latest_widgets:
             widget.deleteLater()
@@ -176,7 +176,7 @@ class MainCheckInWindow(QMainWindow):
                 send_array.append([widget.get_attendee_name(), widget.get_sponsorship_level(), widget.get_check_in_time()])
         time_in_seconds = self.monitor_spin_box.value() * 60
         sending_dict = {
-            "window": time_in_seconds
+            "window": time_in_seconds,
             "array": send_array
         }
         message_string = json.dumps(sending_dict)
@@ -188,6 +188,7 @@ class MainCheckInWindow(QMainWindow):
         response_array = json.loads(json_string)
         for value in response_array:
             widget = AttendeeMonitor(value[0],value[1])
+            self.latest_widgets.append(widget)
             self.monitor_holder_layout.addWidget(widget)
 
     def generate_csv(self):
@@ -219,7 +220,7 @@ class MainCheckInWindow(QMainWindow):
             else:
                 widget.hide()
 
-    def get_latest_checkins(self):
+    def time_refresh(self):
         pass
 
     def get_progress(self):
