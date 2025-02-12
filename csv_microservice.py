@@ -6,7 +6,7 @@ from datetime import datetime
 
 context = zmq.Context()
 socket = context.socket(zmq.REP)
-socket.bind("tcp://*:5556")
+socket.bind("tcp://*:5559")
 while True:
     message = socket.recv_string()
     csv_lines = json.loads(message)

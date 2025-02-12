@@ -204,7 +204,7 @@ class MainCheckInWindow(QMainWindow):
         message_string = json.dumps(send_array)
         context = zmq.Context()
         socket = context.socket(zmq.REQ)
-        socket.connect("tcp://localhost:5556")
+        socket.connect("tcp://localhost:5559")
         socket.send_string(message_string)
         csv_string = socket.recv_string()
         with open(f"{datetime.datetime.now()}CheckInStatus.csv", "w", newline="") as csvfile:
